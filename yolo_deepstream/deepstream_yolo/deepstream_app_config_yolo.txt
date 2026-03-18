@@ -119,6 +119,7 @@ config-file=config_infer_primary_yoloV7.txt
 #config-file=config_infer_primary_yoloV8_dla.txt
 #config-file=config_infer_primary_yoloV9.txt
 #config-file=config_infer_primary_yoloV11.txt
+#config-file=config_infer_primary_yoloV11_obb.txt
 
 [tracker]
 enable=0

@@ -10,6 +10,7 @@
 - `config_infer_primary_yoloV8_dla.txt`: Configuration file for the GStreamer nvinfer plugin for the YoloV8 detector model running with DLA on Jetson.
 - `config_infer_primary_yoloV9.txt`: Configuration file for the GStreamer nvinfer plugin for the YoloV9 detector model.
 - `config_infer_primary_yoloV11.txt`: Configuration file for the GStreamer nvinfer plugin for the YoloV11 detector model.
+- `config_infer_primary_yoloV11_obb.txt`: Configuration file for the GStreamer nvinfer plugin for the YOLOv11 OBB (Oriented Bounding Box) detector model.
 - `nvdsinfer_custom_impl_Yolo/nvdsparsebbox_Yolo.cpp`: Output layer parsing function for detected objects for the Yolo models.
 - `nvdsinfer_custom_impl_Yolo/nvdsparsebbox_Yolo_cuda.cu`: Output layer parsing function for detected objects for the Yolo models by CUDA.
 
@@ -186,6 +187,40 @@ wget https://nvidia.box.com/shared/static/87pt9tlgx588l9j9a9wfdk2yjljjrffn -O yo
 ```ini
 config-file=config_infer_primary_yoloV11.txt
 ```
+
+- Run
+```bash
+deepstream-app -c deepstream_app_config_yolo.txt -t
+```
+The output result will output to `yolo.mp4`
+
+#### YOLOv11 OBB (Oriented Bounding Box)
+
+- Export the YOLOv11 OBB model to ONNX (e.g. with Ultralytics). Requires DeepStream SDK for YOLOv11 OBB custom parser.
+
+```bash
+python3 -c "
+from ultralytics import YOLO
+model = YOLO('yolo11n-obb.pt')
+model.export(format='onnx', dynamic=False, simplify=True)
+"
+```
+
+- Put `yolo11n-obb.onnx` and `labels_obb.txt` under this directory. nvinfer will build the engine on first run. Update `custom-lib-path` in [config_infer_primary_yoloV11_obb.txt](./config_infer_primary_yoloV11_obb.txt) if your DeepStream custom parser is installed elsewhere.
+
+- Modify the [deepstream_app_config_yolo.txt](./deepstream_app_config_yolo.txt) file
+  * Set `uri` under `[source0]` to your own aerial video (e.g. DOTA-style) to test with this model.
+  * Under `[primary-gie]`, set `config-file` and `labelfile-path`.
+
+    ```ini
+    # [source0]
+    uri=file:///path/to/your/aerial_video.mp4
+
+
+    # [primary-gie]
+    config-file=config_infer_primary_yoloV11_obb.txt
+    labelfile-path=labels_obb.txt
+    ```
 
 - Run
 ```bash

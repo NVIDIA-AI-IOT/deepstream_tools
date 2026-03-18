@@ -104,15 +104,17 @@ we provide the following onnx models
 ├── deepstream_yolo
 │   ├── append_transpose_yolov8_v9.py
 │   ├── build_DLA_engine.sh
-│   ├── config_infer_primary_yoloV4.txt     # config file for yolov4 model
-│   ├── config_infer_primary_yoloV7.txt     # config file for yolov7 model
-│   ├── config_infer_primary_yoloV8_dla.txt # config file for yolov8 for Jetson DLA model
-│   ├── config_infer_primary_yoloV8.txt     # config file for yolov8 model
-│   ├── config_infer_primary_yoloV9.txt     # config file for yolov9 model
-|   ├── config_infer_primary_yoloV11.txt    # config file for yolov11 model
+│   ├── config_infer_primary_yoloV4.txt      # config file for yolov4 model
+│   ├── config_infer_primary_yoloV7.txt      # config file for yolov7 model
+│   ├── config_infer_primary_yoloV8_dla.txt  # config file for yolov8 for Jetson DLA model
+│   ├── config_infer_primary_yoloV8.txt      # config file for yolov8 model
+│   ├── config_infer_primary_yoloV9.txt      # config file for yolov9 model
+│   ├── config_infer_primary_yoloV11.txt     # config file for yolov11 model
+│   ├── config_infer_primary_yoloV11_obb.txt # config file for yolov11 OBB model
 │   ├── deepstream_app_config_yolo.txt
-│   ├── labels.txt                          # labels for coco detection
-│   ├── nvdsinfer_custom_impl_Yolo          # output layer parsing functions for detected objects for the Yolo model.
+│   ├── labels.txt                           # labels for coco detection
+│   ├── labels_obb.txt                       # labels for dotav1 detection
+│   ├── nvdsinfer_custom_impl_Yolo           # output layer parsing functions for detected objects for the Yolo model.
 │   │   ├── Makefile
 │   │   ├── nvdsparsebbox_Yolo.cpp
 │   │   └── nvdsparsebbox_Yolo_cuda.cu
